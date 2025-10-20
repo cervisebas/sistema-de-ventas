@@ -3,7 +3,6 @@ import { ScreenContent } from 'components/ScreenContent';
 
 import { StyleSheet, View } from 'react-native';
 
-
 type Props = StaticScreenProps<{
   name: string;
 }>;
@@ -19,11 +18,9 @@ export default function Details({ route }: Props) {
   );
 }
 
-
 export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 24,
-    },
+  container: {
+    flex: 1,
+    padding: 24,
+  },
 });
-

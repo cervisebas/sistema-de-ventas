@@ -7,7 +7,7 @@ module.exports = {
   printWidth: 80,
   bracketSameLine: false,
   endOfLine: 'auto',
-  
-  plugins: [require.resolve("prettier-plugin-tailwindcss")],
-  tailwindAttributes: ["className"],
+
+  plugins: [require.resolve('prettier-plugin-tailwindcss')],
+  tailwindAttributes: ['className'],
 };

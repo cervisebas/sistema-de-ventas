@@ -3,9 +3,6 @@ import { ScreenContent } from 'components/ScreenContent';
 
 import { StyleSheet, View } from 'react-native';
 
-
-
-
 import { Button } from '../components/Button';
 
 export default function Overview() {
@@ -13,9 +10,10 @@ export default function Overview() {
 
   return (
     <View style={styles.container}>
-      <ScreenContent path="screens/overview.tsx" title="Overview">
-      
-      </ScreenContent>
+      <ScreenContent
+        path="screens/overview.tsx"
+        title="Overview"
+      ></ScreenContent>
       <Button
         onPress={() =>
           navigation.navigate('Details', {
@@ -28,11 +26,9 @@ export default function Overview() {
   );
 }
 
-
 export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 24,
-    },
+  container: {
+    flex: 1,
+    padding: 24,
+  },
 });
-
