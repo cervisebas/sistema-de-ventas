@@ -1,13 +1,15 @@
 /* eslint-env node */
-const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
 const { defineConfig } = require('eslint/config');
 const expoConfig = require('eslint-config-expo/flat');
+const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
 
 module.exports = defineConfig([
   expoConfig,
   { ignores: ['**/node_modules', '**/dist', '**/out'] },
   {
-    files: ['**/*.{ts,tsx}'],
+    ignores: ['dist/*'],
+  },
+  {
     rules: {
       'react/display-name': 'off',
 
@@ -26,6 +28,5 @@ module.exports = defineConfig([
       '@typescript-eslint/explicit-function-return-type': 'off',
     },
   },
-  // eslintPluginReactRefresh.configs.recommended,
   eslintPluginPrettierRecommended,
 ]);

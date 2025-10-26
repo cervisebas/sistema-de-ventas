@@ -1,7 +1,7 @@
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { DatabaseName } from '../enums/DatabaseName';
+import { TableName } from '../enums/TableName';
 
-export const ClientSchema = sqliteTable(DatabaseName.CLIENTS, {
+export const ClientSchema = sqliteTable(TableName.CLIENTS, {
   id: integer().primaryKey({ autoIncrement: true }),
   name: text({ length: 50 }).notNull(),
   email: text({ length: 50 }),

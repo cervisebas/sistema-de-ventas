@@ -1,4 +1,4 @@
-export enum DatabaseName {
+export enum TableName {
   CLIENTS = 'clients',
   CATEGORIES = 'categories',
   PRODUCTS = 'products',

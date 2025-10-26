@@ -1,7 +1,7 @@
 import { integer, sqliteTable } from 'drizzle-orm/sqlite-core';
-import { DatabaseName } from '../enums/DatabaseName';
+import { TableName } from '../enums/TableName';
 
-export const DiscountSchema = sqliteTable(DatabaseName.DISCOUNTS, {
+export const DiscountSchema = sqliteTable(TableName.DISCOUNTS, {
   id: integer().primaryKey({ autoIncrement: true }).notNull(),
   id_product: integer().notNull(),
   startDate: integer({ mode: 'timestamp' }).notNull(),

@@ -1,7 +1,7 @@
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { DatabaseName } from '../enums/DatabaseName';
+import { TableName } from '../enums/TableName';
 
-export const CategorySchema = sqliteTable(DatabaseName.CATEGORIES, {
+export const CategorySchema = sqliteTable(TableName.CATEGORIES, {
   id: integer().primaryKey({ autoIncrement: true }).notNull(),
   name: text({ length: 50 }),
 });
