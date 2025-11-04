@@ -4,12 +4,39 @@ const expoConfig = require('eslint-config-expo/flat');
 const reactCompiler = require('eslint-plugin-react-compiler');
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
 
+const tseslint = require('@typescript-eslint/eslint-plugin');
+const tsParser = require('@typescript-eslint/parser');
+
 module.exports = defineConfig([
   expoConfig,
   reactCompiler.configs.recommended,
   { ignores: ['**/node_modules', '**/dist', '**/out'] },
   {
     ignores: ['dist/*'],
+  },
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+    },
+    rules: {
+      '@typescript-eslint/explicit-member-accessibility': [
+        'error',
+        {
+          accessibility: 'explicit',
+          overrides: {
+            constructors: 'no-public',
+          },
+        },
+      ],
+    },
   },
   {
     rules: {

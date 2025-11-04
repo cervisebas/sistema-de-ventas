@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { eq, inArray } from 'drizzle-orm';
 import { db } from '../database';
 import { IRepository } from '../interfaces/IRepository';
 import { SaleItemModel } from '../interfaces/models/SaleItemModel';
@@ -18,23 +18,32 @@ export class SaleItemRepository implements IRepository<SaleItemModel, number> {
   }
 
   public async findAll() {
-    const clients = await db.select().from(SaleItemSchema);
+    const data = await db.select().from(SaleItemSchema);
 
-    return clients;
+    return data;
   }
 
   public async find(id: number) {
-    const client = await db
+    const data = await db
       .select()
       .from(SaleItemSchema)
       .where(eq(SaleItemSchema.id, id));
 
-    return client[0];
+    return data[0];
   }
 
   public async exist(id: number) {
     const find = await this.find(id);
 
     return Boolean(find);
+  }
+
+  public async findMany(id: number[]) {
+    const data = await db
+      .select()
+      .from(SaleItemSchema)
+      .where(inArray(SaleItemSchema.id, id));
+
+    return data;
   }
 }

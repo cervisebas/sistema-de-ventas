@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { eq, inArray } from 'drizzle-orm';
 import { db } from '../database';
 import { IRepository } from '../interfaces/IRepository';
 import { ClientModel } from '../interfaces/models/ClientModel';
@@ -18,23 +18,32 @@ export class ClientRepository implements IRepository<ClientModel, number> {
   }
 
   public async findAll() {
-    const clients = await db.select().from(ClientSchema);
+    const data = await db.select().from(ClientSchema);
 
-    return clients;
+    return data;
   }
 
   public async find(id: number) {
-    const client = await db
+    const data = await db
       .select()
       .from(ClientSchema)
       .where(eq(ClientSchema.id, id));
 
-    return client[0];
+    return data[0];
   }
 
   public async exist(id: number) {
     const find = await this.find(id);
 
     return Boolean(find);
+  }
+
+  public async findMany(id: number[]) {
+    const data = await db
+      .select()
+      .from(ClientSchema)
+      .where(inArray(ClientSchema.id, id));
+
+    return data;
   }
 }
