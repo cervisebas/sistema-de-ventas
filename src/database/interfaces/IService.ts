@@ -1,8 +1,11 @@
-export interface IService<M extends object, K, R> {
+export interface IService<M extends object, K, E extends object, R> {
   repository: R;
   create(data: M): Promise<void>;
   delete(id: K): Promise<void>;
   update(id: K, data: M): Promise<void>;
-  findAll(): Promise<M[]>;
-  find(id: K): Promise<M>;
+  findAll(): Promise<E[]>;
+  find(id: K): Promise<E>;
+  findMany(id: K[]): Promise<E[]>;
+  makeObject?(data: M): Promise<E>;
+  makeObjects?(data: M[]): Promise<E[]>;
 }
