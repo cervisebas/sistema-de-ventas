@@ -1,3 +1,5 @@
+import { GetDataError } from '../errors/GetDataError';
+import { Category } from '../interfaces/entities/Category';
 import { Product } from '../interfaces/entities/Product';
 import { IService } from '../interfaces/IService';
 import { ProductModel } from '../interfaces/models/ProductModel';
@@ -9,6 +11,7 @@ export class ProductService
 {
   public repository: ProductRepository;
   private categoryRepository: CategoryRepository;
+  private categories?: Category[];
 
   constructor() {
     this.repository = new ProductRepository();
@@ -27,19 +30,50 @@ export class ProductService
     return this.repository.update(id, data);
   }
 
+  private async getAllCategories() {
+    try {
+      this.categories = await this.categoryRepository.findAll();
+    } catch (error) {
+      console.error(error);
+      throw new GetDataError(ProductService, error);
+    }
+  }
+
+  public async makeObject(data: ProductModel) {
+    return {
+      ...(data as unknown as Product),
+      category: this.categories?.find((val) => val.id === data.id_category)!,
+    };
+  }
+
   public makeObjects(data: ProductModel[]) {
-    
+    return Promise.all(data.map((value) => this.makeObject(value)));
   }
 
-  public findAll() {
-    return this.repository.findAll();
+  public async findAll() {
+    const [data] = await Promise.all([
+      this.repository.findAll(),
+      this.getAllCategories(),
+    ]);
+
+    return this.makeObjects(data);
   }
 
-  public find(id: number) {
-    return this.repository.find(id);
+  public async find(id: number) {
+    const [data] = await Promise.all([
+      this.repository.find(id),
+      this.getAllCategories(),
+    ]);
+
+    return this.makeObject(data);
   }
 
-  public findMany(id: number[]) {
-    throw new Error('Method not implemented.');
+  public async findMany(id: number[]) {
+    const [data] = await Promise.all([
+      this.repository.findMany(id),
+      this.getAllCategories(),
+    ]);
+
+    return this.makeObjects(data);
   }
 }

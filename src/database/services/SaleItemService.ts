@@ -1,24 +1,24 @@
 import { GetDataError } from '../errors/GetDataError';
-import { Discount } from '../interfaces/entities/Discount';
 import { Product } from '../interfaces/entities/Product';
+import { SaleItem } from '../interfaces/entities/SaleItem';
 import { IService } from '../interfaces/IService';
-import { DiscountModel } from '../interfaces/models/DiscountModel';
-import { DiscountRepository } from '../repositories/DiscountRepository';
+import { SaleItemModel } from '../interfaces/models/SaleItemModel';
+import { SaleItemRepository } from '../repositories/SaleItemRepository';
 import { ProductService } from './ProductService';
 
-export class DiscountService
-  implements IService<DiscountModel, number, Discount, DiscountRepository>
+export class SaleItemService
+  implements IService<SaleItemModel, number, SaleItem, SaleItemRepository>
 {
-  public repository: DiscountRepository;
+  public repository: SaleItemRepository;
   public productService: ProductService;
   private products?: Product[];
 
   constructor() {
-    this.repository = new DiscountRepository();
+    this.repository = new SaleItemRepository();
     this.productService = new ProductService();
   }
 
-  public create(data: DiscountModel) {
+  public create(data: SaleItemModel) {
     return this.repository.create(data);
   }
 
@@ -26,7 +26,7 @@ export class DiscountService
     return this.repository.delete(id);
   }
 
-  public update(id: number, data: DiscountModel) {
+  public update(id: number, data: SaleItemModel) {
     return this.repository.update(id, data);
   }
 
@@ -38,18 +38,18 @@ export class DiscountService
         throw error;
       }
 
-      throw new GetDataError(DiscountService, error);
+      throw new GetDataError(SaleItemService, error);
     }
   }
 
-  public async makeObject(data: DiscountModel) {
+  public async makeObject(data: SaleItemModel) {
     return {
-      ...(data as unknown as Discount),
+      ...(data as unknown as SaleItem),
       product: this.products?.find((val) => val.id === data.id_product)!,
     };
   }
 
-  public makeObjects(data: DiscountModel[]) {
+  public makeObjects(data: SaleItemModel[]) {
     return Promise.all(data.map((value) => this.makeObject(value)));
   }
 
