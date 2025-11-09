@@ -1,7 +1,7 @@
 import { Client } from './Client';
 
 export interface Sale {
-  id: number;
+  id?: number;
   date: Date;
   price: number;
   discount: number;

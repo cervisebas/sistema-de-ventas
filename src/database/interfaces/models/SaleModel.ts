@@ -1,5 +1,5 @@
 export interface SaleModel {
-  id: number;
+  id?: number;
   date: Date;
   price: number;
   discount: number;
