@@ -1,6 +1,8 @@
+import { Category } from '../interfaces/entities/Category';
+import { IController } from '../interfaces/IController';
 import { CategoryService } from '../services/CategoryService';
 
-export class CategoryController {
+export class CategoryController implements IController<number, Category> {
   public service: CategoryService;
 
   constructor() {

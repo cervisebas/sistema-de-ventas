@@ -1,6 +1,8 @@
+import { Client } from '../interfaces/entities/Client';
+import { IController } from '../interfaces/IController';
 import { ClientService } from '../services/ClientService';
 
-export class ClientController {
+export class ClientController implements IController<number, Client> {
   public service: ClientService;
 
   constructor() {
@@ -9,9 +11,9 @@ export class ClientController {
 
   public create(name: string, email: string | null, phone: string | null) {
     return this.service.create({
-      name: name,
-      email: email,
-      phone: phone,
+      name: name.trim(),
+      email: email?.length ? email.trim() : null,
+      phone: phone?.length ? phone.trim() : null,
     });
   }
 
@@ -26,9 +28,9 @@ export class ClientController {
     phone: string | null,
   ) {
     return this.service.update(id, {
-      name: name,
-      email: email,
-      phone: phone,
+      name: name.trim(),
+      email: email?.length ? email.trim() : null,
+      phone: phone?.length ? phone.trim() : null,
     });
   }
 

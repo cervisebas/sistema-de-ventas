@@ -1,6 +1,8 @@
+import { Discount } from '../interfaces/entities/Discount';
+import { IController } from '../interfaces/IController';
 import { DiscountService } from '../services/DiscountService';
 
-export class DiscountController {
+export class DiscountController implements IController<number, Discount> {
   public service: DiscountService;
 
   constructor() {

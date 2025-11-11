@@ -11,15 +11,17 @@ import useSafeArea from '@/hooks/useSafeArea';
 import { ClientController } from '@/database/controllers/ClientController';
 import { refDialog, refNavigation } from '@/constants/Refs';
 import { toast } from 'sonner-native';
+import { Client } from '@/database/interfaces/entities/Client';
 
 export const ClientManager = React.memo(function (props: StackScreenProps) {
+  const editData = props.route.params as Client | undefined;
   const { left, right } = useSafeArea(16);
 
   const formGroup = useForm({
     defaultValues: {
-      name: '',
-      email: '',
-      phone: '',
+      name: editData?.name || '',
+      email: editData?.email || '',
+      phone: editData?.phone || '',
     },
   });
   const inputNext =
@@ -33,13 +35,22 @@ export const ClientManager = React.memo(function (props: StackScreenProps) {
     phone,
   }) {
     try {
-      refDialog.current?.showLoading('Creando cliente...');
+      if (!editData?.id) {
+        refDialog.current?.showLoading('Creando cliente...');
 
-      await clientController.current.create(name, email, phone);
+        await clientController.current.create(name, email, phone);
 
-      refNavigation.current?.goBack();
-      toast.success('Cliente creado correctamente.');
+        toast.success('Cliente creado correctamente.');
+      } else {
+        refDialog.current?.showLoading('Editando cliente...');
+
+        await clientController.current.update(editData.id, name, email, phone);
+
+        toast.success('Cliente editado correctamente.');
+      }
+
       refDialog.current?.showLoading(false);
+      refNavigation.current?.goBack();
     } catch (error) {
       refDialog.current?.showLoading(false);
       refDialog.current?.showAlert({
@@ -53,7 +64,7 @@ export const ClientManager = React.memo(function (props: StackScreenProps) {
     <PrincipalView hideKeyboard>
       <Appbar.Header>
         <Appbar.BackAction onPress={props.navigation.goBack} />
-        <Appbar.Content title={'Crear cliente'} />
+        <Appbar.Content title={editData ? 'Editar cliente' : 'Crear cliente'} />
         <Appbar.Action icon={'send'} onPress={submitForm} />
       </Appbar.Header>
 
@@ -89,7 +100,7 @@ export const ClientManager = React.memo(function (props: StackScreenProps) {
             {...inputNext.toNext('email', 'phone')}
             name={'email'}
             rules={{
-              required: true,
+              required: false,
               minLength: 5,
             }}
             className={'w-full'}
@@ -108,7 +119,7 @@ export const ClientManager = React.memo(function (props: StackScreenProps) {
             {...inputNext.toNext('phone', submitForm)}
             name={'phone'}
             rules={{
-              required: true,
+              required: false,
               minLength: 10,
             }}
             className={'w-full'}

@@ -1,6 +1,8 @@
+import { Product } from '../interfaces/entities/Product';
+import { IController } from '../interfaces/IController';
 import { ProductService } from '../services/ProductService';
 
-export class ProductController {
+export class ProductController implements IController<number, Product> {
   public service: ProductService;
 
   constructor() {

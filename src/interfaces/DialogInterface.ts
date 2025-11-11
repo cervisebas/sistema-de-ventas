@@ -1,3 +1,4 @@
+import { BottomSheetOptionsRef } from '@/components/BottomSheetOptions';
 import React from 'react';
 
 export namespace DialogInterface {
@@ -6,6 +7,7 @@ export namespace DialogInterface {
   export interface IRef {
     showLoading: (message: string | false) => void;
     showAlert: AlertRef['open'];
+    showBottomSheetOptions: BottomSheetOptionsRef['open'];
   }
 
   export interface LoadingRef {

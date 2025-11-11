@@ -17,14 +17,18 @@ import {
 import { StyleSheet } from 'react-native';
 import { DialogInterface } from '../interfaces/DialogInterface';
 import { Toaster } from 'sonner-native';
+import BottomSheetOptions, {
+  BottomSheetOptionsRef,
+} from './BottomSheetOptions';
 
 export const Dialogs = forwardRef(function (
   _: DialogInterface.IProps,
   ref: React.Ref<DialogInterface.IRef>,
 ) {
   const theme = useTheme();
-  const refLoading = useRef<DialogInterface.LoadingRef>(null);
   const refAlert = useRef<DialogInterface.AlertRef>(null);
+  const refLoading = useRef<DialogInterface.LoadingRef>(null);
+  const refBottomSheetOptions = useRef<BottomSheetOptionsRef>(null);
 
   useImperativeHandle(ref, () => ({
     showLoading(message: string | false) {
@@ -35,6 +39,9 @@ export const Dialogs = forwardRef(function (
     },
     showAlert(props: Parameters<DialogInterface.AlertRef['open']>[0]) {
       refAlert.current?.open(props);
+    },
+    showBottomSheetOptions(title, options) {
+      refBottomSheetOptions.current?.open(title, options);
     },
   }));
 
@@ -60,6 +67,8 @@ export const Dialogs = forwardRef(function (
           },
         }}
       />
+
+      <BottomSheetOptions ref={refBottomSheetOptions} />
     </React.Fragment>
   );
 });
