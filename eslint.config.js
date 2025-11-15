@@ -10,7 +10,7 @@ const tsParser = require('@typescript-eslint/parser');
 module.exports = defineConfig([
   expoConfig,
   reactCompiler.configs.recommended,
-  { ignores: ['**/node_modules', '**/dist', '**/out'] },
+  { ignores: ['**/node_modules', '**/dist', '**/out', '**/drizzle'] },
   {
     ignores: ['dist/*'],
   },

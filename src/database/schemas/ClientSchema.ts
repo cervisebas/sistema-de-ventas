@@ -6,4 +6,5 @@ export const ClientSchema = sqliteTable(TableName.CLIENTS, {
   name: text({ length: 50 }).notNull(),
   email: text({ length: 50 }),
   phone: text({ length: 15 }),
+  delete: integer({ mode: 'boolean' }).default(false),
 });
