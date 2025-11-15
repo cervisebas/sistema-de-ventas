@@ -8,4 +8,5 @@ export const ProductSchema = sqliteTable(TableName.PRODUCTS, {
   description: text(),
   id_category: integer().notNull(),
   expire: integer({ mode: 'timestamp' }),
+  delete: integer({ mode: 'boolean' }).default(false),
 });
