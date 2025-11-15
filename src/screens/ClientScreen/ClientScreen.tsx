@@ -12,6 +12,7 @@ import { StackScreenName } from '@/enums/StackScreenName';
 import React, { useCallback, useRef } from 'react';
 import { ListRenderItemInfo, StyleSheet, View } from 'react-native';
 import { Appbar, List } from 'react-native-paper';
+import { toast } from 'sonner-native';
 
 const ITEM_HEIGHT = 56;
 
@@ -22,50 +23,80 @@ export function ClientScreen() {
     controller.current,
   );
 
-  const toggleClientActions = useCallback((client: Client) => {
-    const information: BottomSheetOptionsInterface[] = [];
-    information.push({
-      leftIcon: 'account',
-      label: 'Nombre completo',
-      description: client.name,
-    });
-
-    if (client.email) {
-      information.push({
-        leftIcon: 'email-outline',
-        label: 'Correo electronico',
-        description: client.email,
-      });
-    }
-
-    if (client.phone) {
-      information.push({
-        leftIcon: 'account',
-        label: 'Teléfono',
-        description: client.phone,
-      });
-    }
-
-    refDialog.current?.showBottomSheetOptions('Opciónes', {
-      'Información de cliente': information,
-      'Acciónes rapidas': [
+  const deleteClient = useCallback((client: Client) => {
+    refDialog.current?.showAlert({
+      message: `¿Estas seguro de eliminar el cliente/a "${client.name}"?`,
+      buttons: [
+        { text: 'Cancelar' },
         {
-          leftIcon: 'pencil-outline',
-          label: 'Editar cliente',
-          onPress() {
-            refNavigation.current?.navigate(
-              StackScreenName.CLIENT_MANAGER,
-              client,
-            );
+          text: 'Eliminar',
+          async onPress() {
+            try {
+              refDialog.current?.showLoading('Eliminando cliente...');
+              await controller.current.delete(client.id as number);
+              toast.success('Se elimino el cliente correctamente');
+            } catch (error) {
+              console.error(error);
+              toast.error('Ocurrio un error al eliminar el cliente');
+            } finally {
+              refDialog.current?.showLoading(false);
+            }
           },
-        },
-        {
-          leftIcon: 'delete-outline',
-          label: 'Eliminar cliente',
         },
       ],
     });
   }, []);
+
+  const toggleClientActions = useCallback(
+    (client: Client) => {
+      const information: BottomSheetOptionsInterface[] = [];
+      information.push({
+        leftIcon: 'account',
+        label: 'Nombre completo',
+        description: client.name,
+      });
+
+      if (client.email) {
+        information.push({
+          leftIcon: 'email-outline',
+          label: 'Correo electronico',
+          description: client.email,
+        });
+      }
+
+      if (client.phone) {
+        information.push({
+          leftIcon: 'account',
+          label: 'Teléfono',
+          description: client.phone,
+        });
+      }
+
+      refDialog.current?.showBottomSheetOptions('Opciónes', {
+        'Información de cliente': information,
+        'Acciónes rapidas': [
+          {
+            leftIcon: 'pencil-outline',
+            label: 'Editar cliente',
+            onPress() {
+              refNavigation.current?.navigate(
+                StackScreenName.CLIENT_MANAGER,
+                client,
+              );
+            },
+          },
+          {
+            leftIcon: 'delete-outline',
+            label: 'Eliminar cliente',
+            onPress() {
+              deleteClient(client);
+            },
+          },
+        ],
+      });
+    },
+    [deleteClient],
+  );
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<Client>) => {

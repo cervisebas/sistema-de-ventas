@@ -33,5 +33,4 @@ export namespace DialogInterface {
     }) => void;
     close: () => void;
   }
-
 }

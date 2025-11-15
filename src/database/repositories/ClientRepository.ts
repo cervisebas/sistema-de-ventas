@@ -1,4 +1,4 @@
-import { eq, inArray } from 'drizzle-orm';
+import { eq, inArray, not } from 'drizzle-orm';
 import { db } from '../database';
 import { IRepository } from '../interfaces/IRepository';
 import { ClientModel } from '../interfaces/models/ClientModel';
@@ -10,7 +10,12 @@ export class ClientRepository implements IRepository<ClientModel, number> {
   }
 
   public async delete(id: number) {
-    await db.delete(ClientSchema).where(eq(ClientSchema.id, id));
+    await db
+      .update(ClientSchema)
+      .set({
+        delete: true,
+      })
+      .where(eq(ClientSchema.id, id));
   }
 
   public async update(id: number, data: ClientModel) {
@@ -18,7 +23,10 @@ export class ClientRepository implements IRepository<ClientModel, number> {
   }
 
   public async findAll() {
-    const data = await db.select().from(ClientSchema);
+    const data = await db
+      .select()
+      .from(ClientSchema)
+      .where(not(eq(ClientSchema.delete, true)));
 
     return data;
   }

@@ -1,5 +1,5 @@
-import {useRef} from 'react';
-import {TextInputProps as TextInputNativeProps} from 'react-native';
+import { useRef } from 'react';
+import { TextInputProps as TextInputNativeProps } from 'react-native';
 import { TextInputRef } from '../interfaces/TextInputRef';
 
 export default function <T = string>() {
@@ -14,8 +14,8 @@ export default function <T = string>() {
         returnKeyType: !to
           ? undefined
           : typeof to !== 'string'
-          ? 'send'
-          : 'next',
+            ? 'send'
+            : 'next',
         //blurOnSubmit: typeof to !== 'string',
         submitBehavior: typeof to === 'string' ? 'submit' : undefined,
         onSubmitEditing() {
