@@ -45,9 +45,13 @@ export const SaleManager = React.memo(function (props: StackScreenProps) {
 
   const formGroup = useForm({
     defaultValues: {
-      discount: editData?.discount || '0',
-      client: null as number | null,
-      items: [] as SaleItemFormItem[],
+      discount: String(editData?.discount || 0),
+      client: (editData?.client?.id || null) as number | null,
+      items: (editData?.items.map<SaleItemFormItem>((value) => ({
+        id: value.id,
+        product: value.product,
+        quantity: value.quantity,
+      })) || []) as SaleItemFormItem[],
     },
   });
   const inputNext =
@@ -75,9 +79,6 @@ export const SaleManager = React.memo(function (props: StackScreenProps) {
           Number(discount),
           client,
         );
-
-        console.log(new_id);
-        console.log(JSON.stringify(items));
 
         await Promise.all(
           items.map((v) =>

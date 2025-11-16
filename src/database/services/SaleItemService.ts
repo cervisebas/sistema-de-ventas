@@ -19,7 +19,6 @@ export class SaleItemService
   }
 
   public create(data: SaleItemModel) {
-    console.log(data);
     return this.repository.create(data);
   }
 

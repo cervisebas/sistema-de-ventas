@@ -22,7 +22,6 @@ export const SaleItemList = FormController(function (
   );
 
   const addNewItem = useCallback(() => {
-    console.log(dataProducts);
     const productOptions = dataProducts.map<BottomSheetOptionsInterface>(
       (value) => ({
         label: value.name,

@@ -3,7 +3,7 @@ import { useTableChanges } from './useTableChange';
 import { IController } from '../interfaces/IController';
 
 export function useLiveDatabase<K, E extends object>(
-  tableName: string,
+  tableName: string | string[],
   service: IController<K, E>,
 ) {
   const [loading, setLoading] = useState(false);

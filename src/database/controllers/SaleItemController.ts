@@ -15,7 +15,6 @@ export class SaleItemController implements IController<number, SaleItem> {
     price: number,
     quantity: number,
   ) {
-    console.log(id_product, id_sale, price, quantity);
     return this.service.create({
       id_product: id_product,
       id_sale: id_sale,

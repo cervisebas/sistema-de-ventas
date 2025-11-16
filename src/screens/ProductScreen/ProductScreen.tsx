@@ -113,18 +113,21 @@ export function ProductScreen() {
     [deleteProduct],
   );
 
-  const renderItem = useCallback(({ item }: ListRenderItemInfo<Product>) => {
-    return (
-      <List.Item
-        left={(p) => <List.Icon {...p} icon={'cart-outline'} />}
-        right={(p) => <List.Icon {...p} icon={'dots-vertical'} />}
-        title={item.name}
-        description={parseToCurrency(item.price)}
-        style={styles.items}
-        onPress={() => toggleClientActions(item)}
-      />
-    );
-  }, []);
+  const renderItem = useCallback(
+    ({ item }: ListRenderItemInfo<Product>) => {
+      return (
+        <List.Item
+          left={(p) => <List.Icon {...p} icon={'cart-outline'} />}
+          right={(p) => <List.Icon {...p} icon={'dots-vertical'} />}
+          title={item.name}
+          description={parseToCurrency(item.price)}
+          style={styles.items}
+          onPress={() => toggleClientActions(item)}
+        />
+      );
+    },
+    [toggleClientActions],
+  );
 
   return (
     <PrincipalView>
