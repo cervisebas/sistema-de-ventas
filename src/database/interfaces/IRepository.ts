@@ -1,5 +1,5 @@
 export interface IRepository<M extends object, K> {
-  create(data: M): Promise<void>;
+  create(data: M): Promise<void | number>;
   delete(id: K): Promise<void>;
   update(id: K, data: M): Promise<void>;
   findAll(): Promise<M[]>;

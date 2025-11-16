@@ -19,6 +19,7 @@ export class SaleItemService
   }
 
   public create(data: SaleItemModel) {
+    console.log(data);
     return this.repository.create(data);
   }
 
@@ -74,6 +75,15 @@ export class SaleItemService
   public async findMany(id: number[]) {
     const [data] = await Promise.all([
       this.repository.findMany(id),
+      this.getAllProducts(),
+    ]);
+
+    return this.makeObjects(data);
+  }
+
+  public async findBySale(sale_id: number) {
+    const [data] = await Promise.all([
+      this.repository.findBySale(sale_id),
       this.getAllProducts(),
     ]);
 

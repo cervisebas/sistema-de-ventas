@@ -3,5 +3,5 @@ export interface SaleModel {
   date: Date;
   price: number;
   discount: number;
-  id_client: number;
+  id_client: number | null;
 }

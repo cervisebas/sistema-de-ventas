@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1762738183475,
-      "tag": "0000_tiresome_scourge",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1763223576259,
-      "tag": "0001_curly_toad",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1763234127438,
-      "tag": "0002_modern_scarlet_witch",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1763235612465,
-      "tag": "0003_illegal_silvermane",
+      "when": 1763308341850,
+      "tag": "0000_tidy_maestro",
       "breakpoints": true
     }
   ]

@@ -5,6 +5,7 @@ import { ClientManager } from '@/screens/ClientScreen/ClientManager/ClientManage
 import { CategoryScreen } from '@/screens/CategoryScreen/CategoryScreen';
 import { CategoryManager } from '@/screens/CategoryScreen/CategoryManager/CategoryManager';
 import { ProductManager } from '@/screens/ProductScreen/ProductManager/ProductManager';
+import { SaleManager } from '@/screens/SaleScreen/SaleManager/SaleManager';
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,11 @@ export function StackNavigator() {
       <Stack.Screen
         name={StackScreenName.PRODUCT_MANAGER}
         component={ProductManager}
+      />
+
+      <Stack.Screen
+        name={StackScreenName.SALE_MANAGER}
+        component={SaleManager}
       />
     </Stack.Navigator>
   );

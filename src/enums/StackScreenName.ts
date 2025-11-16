@@ -8,4 +8,6 @@ export enum StackScreenName {
   CATEGORY_MANAGER = 'category-manager',
 
   PRODUCT_MANAGER = 'product-manager',
+
+  SALE_MANAGER = 'sale-manager',
 }

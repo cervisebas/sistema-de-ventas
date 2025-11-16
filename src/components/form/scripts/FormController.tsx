@@ -8,11 +8,11 @@ import {
 } from 'react-hook-form';
 import { HelperText } from 'react-native-paper';
 
-export interface BaseInput {
-  value?: any;
+export interface BaseInput<T = any> {
+  value?: T;
   error?: boolean;
   onBlur?: () => void;
-  onChangeText?: (val: any) => void;
+  onChangeText?: (val: T) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type

@@ -1,1 +1,0 @@
-ALTER TABLE `categories` ADD `delete` integer DEFAULT false;

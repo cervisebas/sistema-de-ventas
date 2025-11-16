@@ -13,13 +13,13 @@ export class SaleController implements IController<number, Sale> {
     date: Date,
     price: number,
     discount: number,
-    id_client: number,
+    id_client?: number | null,
   ) {
     return this.service.create({
       date: date,
       price: price,
       discount: discount,
-      id_client: id_client,
+      id_client: id_client ?? null,
     });
   }
 
@@ -32,13 +32,13 @@ export class SaleController implements IController<number, Sale> {
     date: Date,
     price: number,
     discount: number,
-    id_client: number,
+    id_client?: number | null,
   ) {
     return this.service.update(id, {
       date: date,
       price: price,
       discount: discount,
-      id_client: id_client,
+      id_client: id_client ?? null,
     });
   }
 

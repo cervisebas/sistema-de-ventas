@@ -46,4 +46,13 @@ export class SaleItemRepository implements IRepository<SaleItemModel, number> {
 
     return data;
   }
+
+  public async findBySale(id_sale: number) {
+    const data = await db
+      .select()
+      .from(SaleItemSchema)
+      .where(eq(SaleItemSchema.id_sale, id_sale));
+
+    return data;
+  }
 }

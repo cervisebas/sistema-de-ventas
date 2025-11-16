@@ -5,17 +5,20 @@ import { IService } from '../interfaces/IService';
 import { SaleModel } from '../interfaces/models/SaleModel';
 import { SaleRepository } from '../repositories/SaleRepository';
 import { ClientService } from './ClientService';
+import { SaleItemService } from './SaleItemService';
 
 export class SaleService
   implements IService<SaleModel, number, Sale, SaleRepository>
 {
   public repository: SaleRepository;
   public clientService: ClientService;
+  public saleItemService: SaleItemService;
   private clients?: Client[];
 
   constructor() {
     this.repository = new SaleRepository();
     this.clientService = new ClientService();
+    this.saleItemService = new SaleItemService();
   }
 
   public create(data: SaleModel) {
@@ -43,9 +46,12 @@ export class SaleService
   }
 
   public async makeObject(data: SaleModel) {
+    const items = await this.saleItemService.findBySale(data.id!);
+
     return {
       ...(data as unknown as Sale),
-      product: this.clients?.find((val) => val.id === data.id_client)!,
+      client: this.clients?.find((val) => val.id === data.id_client)!,
+      items: items,
     };
   }
 

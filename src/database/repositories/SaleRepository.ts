@@ -6,7 +6,8 @@ import { SaleSchema } from '../schemas/SaleSchema';
 
 export class SaleRepository implements IRepository<SaleModel, number> {
   public async create(data: SaleModel) {
-    await db.insert(SaleSchema).values(data);
+    const insert = await db.insert(SaleSchema).values(data);
+    return insert.lastInsertRowId;
   }
 
   public async delete(id: number) {

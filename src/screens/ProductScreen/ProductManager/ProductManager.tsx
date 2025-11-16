@@ -172,7 +172,7 @@ export const ProductManager = React.memo(function (props: StackScreenProps) {
               required: true,
             }}
             options={categoryOptions}
-            disabled={loadingCategories}
+            disabled={loadingCategories || !dataCategories.length}
             control={formGroup.control}
             formState={formGroup.formState}
             style={styles.inputs}
