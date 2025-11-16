@@ -168,7 +168,9 @@ export const SaleManager = React.memo(function (props: StackScreenProps) {
             label={'Descuento'}
             mode={'outlined'}
             keyboardType={'number-pad'}
-            errorMessage={'Ingrese un descuento valido.'}
+            errorMessage={
+              'Ingrese un descuento valido, el valor debe ser entre 0 a 100.'
+            }
           />
 
           <FormElements.CustomPicker
