@@ -57,4 +57,8 @@ export class ProductController implements IController<number, Product> {
   public async findMany(id: number[]) {
     return this.service.findMany(id);
   }
+
+  public count() {
+    return this.service.count();
+  }
 }

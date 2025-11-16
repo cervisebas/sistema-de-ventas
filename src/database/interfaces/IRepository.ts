@@ -6,4 +6,5 @@ export interface IRepository<M extends object, K> {
   find(id: K): Promise<M>;
   findMany(id: K[]): Promise<M[]>;
   exist(id: K): Promise<boolean>;
+  count(): Promise<number>;
 }

@@ -45,4 +45,8 @@ export class ClientController implements IController<number, Client> {
   public findMany(id: number[]) {
     return this.service.findMany(id);
   }
+
+  public count() {
+    return this.service.count();
+  }
 }

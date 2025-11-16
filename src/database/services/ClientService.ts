@@ -35,4 +35,8 @@ export class ClientService
   public findMany(id: number[]) {
     return this.repository.findMany(id);
   }
+
+  public count() {
+    return this.repository.count();
+  }
 }

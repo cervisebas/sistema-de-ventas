@@ -53,4 +53,8 @@ export class SaleItemController implements IController<number, SaleItem> {
   public async findMany(id: number[]) {
     return this.service.findMany(id);
   }
+
+  public count() {
+    return this.service.count();
+  }
 }

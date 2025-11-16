@@ -45,4 +45,8 @@ export class DiscountController implements IController<number, Discount> {
   public async findMany(id: number[]) {
     return this.service.findMany(id);
   }
+
+  public count() {
+    return this.service.count();
+  }
 }

@@ -8,4 +8,5 @@ export interface IService<M extends object, K, E extends object, R> {
   findMany(id: K[]): Promise<E[]>;
   makeObject?(data: M): Promise<E>;
   makeObjects?(data: M[]): Promise<E[]>;
+  count(): Promise<number>;
 }

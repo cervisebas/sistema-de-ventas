@@ -1,4 +1,4 @@
-import { eq, inArray, not } from 'drizzle-orm';
+import { count, eq, inArray, not } from 'drizzle-orm';
 import { db } from '../database';
 import { IRepository } from '../interfaces/IRepository';
 import { ProductModel } from '../interfaces/models/ProductModel';
@@ -53,5 +53,13 @@ export class ProductRepository implements IRepository<ProductModel, number> {
       .where(inArray(ProductSchema.id, id));
 
     return data;
+  }
+
+  public async count() {
+    const [{ count: _count }] = await db
+      .select({ count: count(ProductSchema.id) })
+      .from(ProductSchema);
+
+    return _count;
   }
 }

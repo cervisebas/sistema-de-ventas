@@ -1,4 +1,4 @@
-import { eq, inArray } from 'drizzle-orm';
+import { count, eq, inArray } from 'drizzle-orm';
 import { db } from '../database';
 import { IRepository } from '../interfaces/IRepository';
 import { DiscountModel } from '../interfaces/models/DiscountModel';
@@ -45,5 +45,13 @@ export class DiscountRepository implements IRepository<DiscountModel, number> {
       .where(inArray(DiscountSchema.id, id));
 
     return data;
+  }
+
+  public async count() {
+    const [{ count: _count }] = await db
+      .select({ count: count(DiscountSchema.id) })
+      .from(DiscountSchema);
+
+    return _count;
   }
 }

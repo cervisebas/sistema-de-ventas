@@ -2,7 +2,7 @@ import React from 'react';
 import { BottomRoutes } from '@/constants/BottomRoutes';
 import { BottomNavigation as NativeBottomNavigation } from 'react-native-paper';
 import { BottomScreenName } from '@/enums/BottomScreenName';
-import { HomeScreen } from '@/screens/HomeScreen';
+import { HomeScreen } from '@/screens/HomeScreen/HomeScreen';
 import { SaleScreen } from '@/screens/SaleScreen/SaleScreen';
 import { ProductScreen } from '@/screens/ProductScreen/ProductScreen';
 import { ClientScreen } from '@/screens/ClientScreen/ClientScreen';

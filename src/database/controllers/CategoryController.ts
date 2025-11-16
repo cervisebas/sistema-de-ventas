@@ -36,4 +36,8 @@ export class CategoryController implements IController<number, Category> {
   public findMany(id: number[]) {
     return this.service.findMany(id);
   }
+
+  public count() {
+    return this.service.count();
+  }
 }

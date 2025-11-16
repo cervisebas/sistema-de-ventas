@@ -79,4 +79,8 @@ export class DiscountService
 
     return this.makeObjects(data);
   }
+
+  public count() {
+    return this.repository.count();
+  }
 }

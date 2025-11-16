@@ -85,4 +85,8 @@ export class SaleService
 
     return this.makeObjects(data);
   }
+
+  public count() {
+    return this.repository.count();
+  }
 }
