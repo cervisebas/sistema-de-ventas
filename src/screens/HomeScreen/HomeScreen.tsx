@@ -21,7 +21,7 @@ export function HomeScreen() {
             title={'Ventas'}
             right={(p) => (
               <Text {...p} variant={'titleMedium'}>
-                {clients}
+                {sales}
               </Text>
             )}
           />
@@ -41,7 +41,7 @@ export function HomeScreen() {
             title={'Clientes'}
             right={(p) => (
               <Text {...p} variant={'titleMedium'}>
-                {sales}
+                {clients}
               </Text>
             )}
           />
